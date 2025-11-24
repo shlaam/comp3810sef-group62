@@ -38,29 +38,20 @@ On the  page:
 # API Testing with curl
 
 ## Step 1: Register a test account
-curl -X POST http://localhost:3000/register \
-  -H "Content-Type: application/x-www-form-urlencoded" \
-  -d "username=test&password=testtest"
+curl -X POST https://comp3810sef-group62.onrender.com/register -H "Content-Type: application/x-www-form-urlencoded" -d "username=test&password=testtest"
 
 ## Step 2: Log in and store session cookie
-curl -c cookie.txt -X POST http://localhost:3000/login \
-  -H "Content-Type: application/x-www-form-urlencoded" \
-  -H "Accept: application/json" \
-  -d "username=test&password=testtest"
+curl -c cookie.txt -X POST https://comp3810sef-group62.onrender.com/login -H "Content-Type: application/x-www-form-urlencoded" -H "Accept: application/json" -d "username=test&password=testtest"
 
 ## Step 3: Send authenticated request to create an event
-- Create an event
-curl -b cookie.txt -X POST http://localhost:3000/api/events \
-  -H "Content-Type: application/json" \
-  -d '{ "title": "Meeting", "date": "2025-11-25", "description": "Team sync" }'
+Create an event
+curl -b cookie.txt -X POST https://comp3810sef-group62.onrender.com/api/events -H "Content-Type: application/json" -d "{\"title\":\"Meeting\",\"date\":\"2025-11-25\",\"description\":\"Team sync\"}"
 
-- Read all events
-curl -b cookie.txt -X GET http://localhost:3000/api/events
+Read all events
+curl -b cookie.txt -X GET https://comp3810sef-group62.onrender.com/api/events
 
-- Update an event
-curl -b cookie.txt -X PUT http://localhost:3000/api/events/<event_id> \
-  -H "Content-Type: application/json" \
-  -d "{\"title\":\"Updated Meeting\",\"date\":\"2025-11-26\",\"description\":\"Updated team sync\"}"
+Update an event
+curl -b cookie.txt -X PUT https://comp3810sef-group62.onrender.com/api/events/69240ddbd5d5c1df15abba12 -H "Content-Type: application/json" -d "{\"title\":\"Updated Meeting\",\"date\":\"2025-11-26\",\"description\":\"Updated team sync\"}"
 
-- Delete an event
-curl -b cookie.txt -X DELETE http://localhost:3000/api/events/<event_id>
+Delete an event
+curl -b cookie.txt -X DELETE https://comp3810sef-group62.onrender.com/api/events/<event_id>
