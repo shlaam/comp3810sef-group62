@@ -50,17 +50,17 @@ curl -c cookie.txt -X POST http://localhost:3000/login \
 
 ## Step 3: Send authenticated request to create an event
 - Create an event
-- curl -b cookie.txt -X POST http://localhost:3000/api/events \
+curl -b cookie.txt -X POST http://localhost:3000/api/events \
   -H "Content-Type: application/json" \
   -d '{ "title": "Meeting", "date": "2025-11-25", "description": "Team sync" }'
 
 - Read all events
-- curl -b cookie.txt -X GET http://localhost:3000/api/events
+curl -b cookie.txt -X GET http://localhost:3000/api/events
 
 - Update an event
-- curl -b cookie.txt -X PUT http://localhost:3000/api/events/<event_id> \
+curl -b cookie.txt -X PUT http://localhost:3000/api/events/<event_id> \
   -H "Content-Type: application/json" \
   -d "{\"title\":\"Updated Meeting\",\"date\":\"2025-11-26\",\"description\":\"Updated team sync\"}"
 
 - Delete an event
-- curl -b cookie.txt -X DELETE http://localhost:3000/api/events/<event_id>
+curl -b cookie.txt -X DELETE http://localhost:3000/api/events/<event_id>
