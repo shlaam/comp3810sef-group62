@@ -1,5 +1,3 @@
-require('dotenv').config();
-
 const express = require('express');
 const mongoose = require('mongoose');
 const session = require('express-session');
@@ -10,15 +8,15 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const path = require('path');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = 3000;
 
 // ===== Google OAuth =====
-const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
-const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
+const GOOGLE_CLIENT_ID = '136384587330-3lrq85beitigsrk2t8hjc78t2d0ovusg.apps.googleusercontent.com';
+const GOOGLE_CLIENT_SECRET = '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';
 // =============================
 
 const MONGODB_URI = 'mongodb+srv://admin:admin@cluster0.lnqtbw7.mongodb.net/?appName=Cluster0';
-const SESSION_SECRET = process.env.SESSION_SECRET;
+const SESSION_SECRET = 'calendar-super-secret-2025';
 
 mongoose.connect(MONGODB_URI)
   .then(() => console.log('✅ MongoDB connected'))
@@ -63,7 +61,7 @@ app.use(passport.session());
 passport.use(new GoogleStrategy({
   clientID: GOOGLE_CLIENT_ID,
   clientSecret: GOOGLE_CLIENT_SECRET,
-  callbackURL: 'http://localhost:3000/auth/google/callback'
+  callbackURL: 'https://comp3810-group62.onrender.com/auth/google/callback'
 }, async (accessToken, refreshToken, profile, done) => {
   try {
     let user = await User.findOne({ googleId: profile.id });
@@ -139,7 +137,7 @@ app.get('/calendar', (req, res) => {
 
 // ================== RESTful API ==================
 app.get('/api/events', async (req, res) => {
-  if (!req.isAuthenticated()) return res.status(401).json({ error: '未登入' });
+  if (!req.isAuthenticated()) return res.status(401).json({ error: 'Not logged in' });
   const events = await Event.find({ userId: req.user._id });
   const formatted = events.map(e => ({
     id: e._id.toString(),
@@ -151,7 +149,7 @@ app.get('/api/events', async (req, res) => {
 });
 
 app.post('/api/events', async (req, res) => {
-  if (!req.isAuthenticated()) return res.status(401).json({ error: '未登入' });
+  if (!req.isAuthenticated()) return res.status(401).json({ error: 'Not logged in' });
   try {
     const event = await Event.create({
       userId: req.user._id,
@@ -205,7 +203,6 @@ app.delete('/api/events/:id', async (req, res) => {
 // ====================================================
 
 app.listen(PORT, () => {
-  console.log(`🚀 Server running → http://localhost:${PORT}`);
-  console.log(`🔗 Google login test：http://localhost:${PORT}/auth/google`);
+  console.log(`🚀 Server running`);
+  console.log(`🔗 Google login test`);
 });
-
