@@ -4,7 +4,7 @@
 - Course: COMP3810SEF 
 - Group: Group 62
 - Members: SHAM Hoi Laam (13902788), LEE Ka Mei (14077641), Ng Tsz Chung (14029225)
-- Deployed URL: https://comp3810sef-group62-2.onrender.com/ 
+- Deployed URL: https://comp3810sef-group62.onrender.com/ 
 
 ## Project File Overview
 - server.js: Main server file that integrates Express, MongoDB, and Passport. It handles user authentication (Google OAuth and username/password), session management, and provides RESTful APIs for calendar event CRUD operations.
